@@ -1,0 +1,12 @@
+- name: Cấu hình trên router
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Show IP
+      ros_command:
+        commands:
+          - "/interface print"
+      register: output
+
+    - debug: var=output.stdout_lines

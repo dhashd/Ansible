@@ -1,0 +1,11 @@
+- name: Show version
+  hosts: all
+  gather_facts: no
+  
+  tasks:
+    - name: Show version
+      ros_command:
+        commands: "/system resource print"
+      register: result
+    - fail: msg="Can update version"
+      when: "'RouterOS Version: 6.48' not in result.stdout_lines[0]"
