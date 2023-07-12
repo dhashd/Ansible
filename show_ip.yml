@@ -1,15 +1,16 @@
 ---
-- name: Cấu hình trên router
+- name: Show MikroTik router IP
   hosts: all
   gather_facts: no
 
   tasks:
-    - name: Show IP
-      connection: local
-      become: no
-      command:
-        cmd: "/interface print"
-      register: output
+    - name: Fetch router IP address
+      routeros_command:
+        commands:
+          - "/ip address print"
+      register: router_output
 
-    - debug:
-        var: output.stdout_lines
+    - name: Display router IP
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ router_output['stdout_lines'][0] }}"
