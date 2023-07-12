@@ -1,0 +1,11 @@
+---
+- name: Create and Delete VLANs on MikroTik Router
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Delete VLAN
+      routeros_command:
+        commands:
+          - "/interface vlan remove [find name=VLAN100]"
+      register: delete_vlan
+      ignore_errors: yes
