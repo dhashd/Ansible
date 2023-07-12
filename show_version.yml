@@ -1,3 +1,4 @@
+---
 - name: Show version
   hosts: all
   gather_facts: no
