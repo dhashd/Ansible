@@ -5,7 +5,6 @@
   
   tasks:
     - name: Show version
-      ros_command:
         commands: "/system resource print"
       register: result
     - fail: msg="Can update version"
