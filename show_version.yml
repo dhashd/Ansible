@@ -5,7 +5,8 @@
   
   tasks:
     - name: Show version
-        commands: "/system resource print"
+      routeros_command:
+        commands: show version
       register: result
-    - fail: msg="Can update version"
-      when: "'RouterOS Version: 6.48' not in result.stdout_lines[0]"
+    - fail: msg="can update version"
+      when: "not ('Version 6.44.1' in result.stdout[0])"
