@@ -6,7 +6,7 @@
   tasks:
     - name: Show version
       routeros_command:
-        commands: show version
+        commands: \show version
       register: result
     - fail: msg="can update version"
       when: "not ('Version 6.44.1' in result.stdout[0])"
