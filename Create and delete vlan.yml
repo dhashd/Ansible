@@ -1,0 +1,15 @@
+---
+- name: Create and Delete Vlan
+  hosts: mikrotik_routers
+  gather_facts: no
+
+  tasks:
+    - name: Create Vlan
+      routeros_command:
+        commands:
+          - "/interface vlan add name=vlan10 vlan-id=10 interface=ether1"
+  tasks:
+    - name: Delete Vlan
+	    routeros_command:
+        commands:
+          - "/interface vlan remove [find name=vlan10]"
