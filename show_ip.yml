@@ -5,8 +5,11 @@
 
   tasks:
     - name: Show IP
-        commands:
-          - "/interface print"
+      connection: local
+      become: no
+      command:
+        cmd: "/interface print"
       register: output
 
-    - debug: var=output.stdout_lines
+    - debug:
+        var: output.stdout_lines
