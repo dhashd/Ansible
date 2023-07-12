@@ -1,3 +1,4 @@
+---
 - name: Cấu hình trên router
   hosts: all
   gather_facts: no
