@@ -5,7 +5,6 @@
 
   tasks:
     - name: Show IP
-      ros_command:
         commands:
           - "/interface print"
       register: output
