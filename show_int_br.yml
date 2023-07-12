@@ -1,0 +1,16 @@
+---
+- name: Show MikroTik interface brief
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Fetch interface brief
+      routeros_command:
+        commands:
+          - "/interface print brief"
+      register: interface_output
+
+    - name: Display interface brief
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ interface_output['stdout_lines'][0] }}"
