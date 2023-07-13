@@ -1,0 +1,22 @@
+---
+- name: Restore MikroTik Configuration
+  hosts: all 
+
+  tasks:
+    - name: Copy Backup File to MikroTik
+      copy:
+        src: "path_to_backup_file_locally"
+        dest: "/backup_file.backup"
+        mode: 0644
+      # Thay đổi "path_to_backup_file_locally" thành đường dẫn tới tệp tin backup (.backup) trên máy tính của bạn
+
+    - name: Restore Configuration
+      routeros_command:
+        commands:
+          - "/system backup load name=backup_file.backup run-after-load=yes"
+          # Thay đổi "backup_file.backup" thành tên tệp tin backup (.backup) trên MikroTik
+
+    - name: Reboot MikroTik Router
+      routeros_command:
+        commands:
+          - "/system reboot"
