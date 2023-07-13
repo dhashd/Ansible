@@ -1,0 +1,9 @@
+---
+- name: Remove IP from Ethernet 4 on MikroTik
+  hosts: all
+
+  tasks:
+    - name: Remove IP from Ethernet 4
+      routeros_command:
+        commands:
+          - "/ip address remove [find interface=ether7]"
