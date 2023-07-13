@@ -1,0 +1,10 @@
+---
+- name: Set IP for Ethernet 7 on MikroTik
+  hosts: all
+
+  tasks:
+    - name: Set IP for Ethernet 7
+      routeros_command:
+        commands:
+          - "/interface ethernet set [find name=\"ether7\"]"
+          - "/ip address add address=\"192.168.7.1/24\" interface=ether4"
