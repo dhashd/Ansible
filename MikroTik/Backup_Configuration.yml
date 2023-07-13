@@ -1,0 +1,17 @@
+---
+- name: Backup MikroTik Configuration
+  hosts: all
+
+  tasks:
+    - name: Backup Configuration
+      routeros_command:
+        commands:
+          - "/system backup save name=backup_{{ ansible_date_time.date }}_{{ ansible_date_time.time }}"
+          # Tên file backup sẽ được đặt dựa trên ngày và giờ hiện tại
+
+    - name: Fetch Backup File
+      fetch:
+        src: "/backup_{{ ansible_date_time.date }}_{{ ansible_date_time.time }}.backup"
+        dest: "path_to_save_backup_locally" #Chỉnh sửa path_to_save_backup_locally thành đường dẫn tới thư mục muốn lưu trữ
+        flat: yes
+        fail_on_missing: no
