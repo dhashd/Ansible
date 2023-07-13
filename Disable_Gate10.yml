@@ -1,13 +1,9 @@
 ---
-- name: TurnOFF Gate 10
+- name: Disable Ethernet 2 on MikroTik
   hosts: all
-  gather_facts: no
-  tasks:
-    - name: Lấy thông tin về cổng số 10
-      command: "/interface ethernet print where name=ether10"
-      register: interface_info
-      changed_when: false
 
-    - name: Tắt cổng số 10
-      command: "/interface ethernet disable {{ interface_info.stdout_lines[0].split()[0] }}"
-      when: interface_info.stdout_lines | length > 0
+  tasks:
+    - name: Disable Ethernet 2
+      routeros_command:
+        commands:
+          - "/interface ethernet disable [find name=\"ether2\"]"
