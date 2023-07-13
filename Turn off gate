@@ -2,7 +2,7 @@
 - name: TurnOFF Gate 10
   hosts: all
   gather_facts: no
-      tasks:
+  tasks:
     - name: Lấy thông tin về cổng số 10
       command: "/interface ethernet print where name=ether10"
       register: interface_info
