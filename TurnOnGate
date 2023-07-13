@@ -1,0 +1,13 @@
+---
+- name: TurnOn Gate 10
+  hosts: all
+  gather_facts: no
+      tasks:
+    - name: Lấy thông tin về cổng số 10
+      command: "/interface ethernet print where name=ether10"
+      register: interface_info
+      changed_when: false
+
+    - name: Bật cổng số 10
+      command: "/interface ethernet enable {{ interface_info.stdout_lines[0].split()[0] }}"
+      when: interface_info.stdout_lines | length > 0
