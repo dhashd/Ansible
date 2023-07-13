@@ -1,0 +1,18 @@
+---
+- name: MikroTik Port Status
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Get Port Status
+      routeros_command:
+        commands:
+          - "/interface ethernet print terse"
+      register: port_status
+
+    - name: Display Port Status
+      debug:
+        msg: "Port {{ item.name }} is {{ item.status }}"
+      loop: "{{ port_status.stdout_lines[1:] }}"
+      loop_control:
+        index_var: item_index
+      when: item_index != 0
