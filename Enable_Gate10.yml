@@ -3,12 +3,6 @@
   hosts: all
   gather_facts: no
   tasks:
-    - name: Chạy nhiều lệnh
-      routeros_command:
-      command: 
-      "/interface ethernet print where name=ether10"
-      "/interface ethernet enable {{ interface_info.stdout_lines[0].split()[0] }}"
-      
     - name: Lấy thông tin về cổng số 10
       routeros_commands:
       command: "/interface ethernet print where name=ether10"
