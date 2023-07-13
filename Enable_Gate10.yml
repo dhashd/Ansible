@@ -1,15 +1,9 @@
 ---
-- name: TurnOn Gate 10
+- name: Enable Ethernet 2 on MikroTik
   hosts: all
-  gather_facts: no
-  tasks:
-    - name: Lấy thông tin về cổng số 10
-      routeros_commands:
-      command: "/interface ethernet print where name=ether10"
-      register: interface_info
-      changed_when: false
 
-    - name: Bật cổng số 10
-      routeros_commands:
-      command: "/interface ethernet enable {{ interface_info.stdout_lines[0].split()[0] }}"
-      when: interface_info.stdout_lines | length > 0
+  tasks:
+    - name: Enable Ethernet 2
+      routeros_command:
+        commands:
+          - "/interface ethernet enable [find name=\"ether2\"]"
