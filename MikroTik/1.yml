@@ -1,7 +1,7 @@
 ---
 - name: Configure IP address for Ethernet interface
-  hosts:all
-  gather_facts: false
+  hosts: all
+  gather_facts: no
 
   vars_prompt:
     - name: interface
