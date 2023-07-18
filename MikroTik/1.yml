@@ -1,7 +1,7 @@
 ---
 - name: Configure IP address for Ethernet interface
   hosts: all
-  gather_facts: no
+  gather_facts: false
 
   vars_prompt:
     - name: interface
@@ -14,15 +14,18 @@
 
   tasks:
     - name: Configure interface
-    routeros_command:
-      command: "/interface ethernet set [find name={{ interface }}]"
-      register: result1
+      routeros_command:
+        commands:
+          - "/interface ethernet set [find name='{{ interface }}']"
+        host: your_routeros_host
+        username: admin
+        password: admin
 
     - name: Add IP address
-    routeros_command:
-      command: "/ip address add address={{ ip_address }} interface={{ interface }}"
-      register: result2
+      routeros_command:
+        commands:
+          - "/ip address add address='{{ ip_address }}' interface='{{ interface }}'"
+        host: your_routeros_host
+        username: admin
+        password: admin
 
-    - name: Show result
-      debug:
-        var: result1.stdout_lines + result2.stdout_lines
