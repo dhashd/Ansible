@@ -17,15 +17,12 @@
       routeros_command:
         commands:
           - "/interface ethernet set [find name='{{ interface }}']"
-        host: your_routeros_host
-        username: admin
-        password: admin
+        host: all
+    
 
     - name: Add IP address
       routeros_command:
         commands:
           - "/ip address add address='{{ ip_address }}' interface='{{ interface }}'"
-        host: your_routeros_host
-        username: admin
-        password: admin
+        host: all
 
