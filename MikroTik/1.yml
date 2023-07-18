@@ -1,28 +1,15 @@
 ---
-- name: Configure IP address for Ethernet interface
-  hosts: all
-  gather_facts: no
-
+- hosts: all
   vars_prompt:
-    - name: interface
-      prompt: "Enter the interface name (e.g., ether1)"
-      private: no
 
-    - name: ip_address
-      prompt: "Enter the new IP address (e.g., 192.168.0.2/24)"
-      private: no
+    - name: username
+      prompt: What is your username?
+      private: false
 
-  tasks:
-    - name: Configure interface
-      routeros_command:
-        commands:
-          - "/interface ethernet set [find name='{{ interface }}']"
-        host: all
-    
+    - name: password
+      prompt: What is your password?
 
-    - name: Add IP address
-      routeros_command:
-        commands:
-          - "/ip address add address='{{ ip_address }}' interface='{{ interface }}'"
-        host: all
-
+  tasks
+    - name: Print a message
+      ansible.builtin.debug:
+        msg: 'Logging in as {{ username }}'
