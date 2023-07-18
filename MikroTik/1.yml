@@ -1,0 +1,28 @@
+---
+- name: Configure IP address for Ethernet interface
+  hosts:all
+  gather_facts: false
+
+  vars_prompt:
+    - name: interface
+      prompt: "Enter the interface name (e.g., ether1)"
+      private: no
+
+    - name: ip_address
+      prompt: "Enter the new IP address (e.g., 192.168.0.2/24)"
+      private: no
+
+  tasks:
+    - name: Configure interface
+    routeros_command:
+      command: "/interface ethernet set [find name={{ interface }}]"
+      register: result1
+
+    - name: Add IP address
+    routeros_command:
+      command: "/ip address add address={{ ip_address }} interface={{ interface }}"
+      register: result2
+
+    - name: Show result
+      debug:
+        var: result1.stdout_lines + result2.stdout_lines
