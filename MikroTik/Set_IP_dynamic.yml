@@ -1,6 +1,7 @@
 ---
 - name: Set IP for Ethernet Interface on MikroTik
   hosts: all
+  gather_facts: no
   vars_prompt:
     - name: target_interface
       prompt: "Enter target interface name:"
@@ -11,5 +12,10 @@
     - name: Set IP for target interface
       routeros_command:
         commands:
-          - "/interface ethernet set [find name=\"{{ target_interface }}\"]"
-          - "/ip address add address=\"{{ target_ip }}\" interface={{ target_interface }}"
+          - "/interface ethernet set [find name=\"{{ target_interface }}\"] comment=\"{{ target_ip }}\""
+          - "/ip address add address=\"{{ target_ip }}\" interface=\"{{ target_interface }}\""
+      register: result
+
+    - name: Print result
+      debug:
+        var: result
