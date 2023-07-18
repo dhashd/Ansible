@@ -5,15 +5,18 @@
   vars_prompt:
     - name: target_interface
       prompt: "Enter target interface name:"
+      private: no
+
     - name: target_ip
       prompt: "Enter target IP address (e.g., 192.168.1.2/24):"
+      private: no
 
   tasks:
     - name: Set IP for target interface
       routeros_command:
         commands:
-          - "/interface ethernet set [find name=\"{{ target_interface }}\"] comment=\"{{ target_ip }}\""
-          - "/ip address add address=\"{{ target_ip }}\" interface=\"{{ target_interface }}\""
+          - "/interface ethernet set [find name='{{ target_interface }}'] comment='{{ target_ip }}'"
+          - "/ip address add address='{{ target_ip }}' interface='{{ target_interface }}'"
       register: result
 
     - name: Print result
