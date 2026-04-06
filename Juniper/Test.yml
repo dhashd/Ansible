@@ -4,12 +4,11 @@
 
   tasks:
     - name: Lấy thông tin version
-      junipernetworks.junos.junos_command:
+      juniper.device.junos_command:
         commands:
           - show version
-
       register: output
 
-    - name: In kết quả ra màn hình
+    - name: In kết quả
       debug:
         var: output.stdout_lines
