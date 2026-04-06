@@ -1,3 +1,2 @@
 collections:
-  - name: junipernetworks.junos
-paramiko
+  - name: juniper.device
