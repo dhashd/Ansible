@@ -1,0 +1,15 @@
+- name: Test kết nối tới Juniper Switch
+  hosts: juniper-switch
+  gather_facts: no
+
+  tasks:
+    - name: Lấy thông tin version
+      junipernetworks.junos.junos_command:
+        commands:
+          - show version
+
+      register: output
+
+    - name: In kết quả ra màn hình
+      debug:
+        var: output.stdout_lines
